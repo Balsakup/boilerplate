@@ -7,10 +7,17 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const devMode                 = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-    entry: './src/js/app.js',
+    entry: {
+        app: './src/js/app.js'
+    },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist/assets'),
+        publicPath: '/assets/',
         filename: devMode ? '[name].js' : '[name].[chunkhash].js'
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true
     },
     module: {
         rules: [
@@ -53,11 +60,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin('dist'),
-        new ManifestPlugin,
+        new CleanWebpackPlugin('dist', {
+            exclude: 'index.html'
+        }),
+        new ManifestPlugin({
+            name: path.resolve(__dirname, 'dist')
+        }),
         new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-            chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+            filename: devMode ? '[name].css' : '[name].[hash].css'
         })
     ],
     optimization: {

@@ -22,10 +22,12 @@
         "url-loader": "^1.1.2",
         "webpack": "^4.29.5",
         "webpack-cli": "^3.2.3",
+        "webpack-dev-server": "^3.2.1",
         "webpack-manifest-plugin": "^2.0.4"
     },
     "scripts": {
         "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-        "build:prod": "cross-env NODE_ENV=production webpack --mode production"
+        "build:prod": "cross-env NODE_ENV=production webpack --mode production",
+        "serve": "cross-env NODE_ENV=development webpack-dev-server"
     }
 }
