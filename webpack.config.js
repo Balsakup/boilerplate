@@ -19,6 +19,9 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true
     },
+    resolve: {
+        extensions: [ '.js', '.ts' ]
+    },
     module: {
         rules: [
             {
@@ -53,7 +56,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(t|j)s$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
             }
